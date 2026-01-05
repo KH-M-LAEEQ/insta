@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "664135685764",
+    "project_id": "project-instagram-d9488",
+    "storage_bucket": "project-instagram-d9488.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664135685764:android:b35276e83b1f04ef7294d1",
+        "android_client_info": {
+          "package_name": "com.example.insta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664135685764-rotmfavmegm46r6ubv7c8t3ip4g2lnvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.insta",
+            "certificate_hash": "698b80c85006aa7682da0db99329d98236baf467"
+          }
+        },
+        {
+          "client_id": "664135685764-j8tag1p8drqorsvrts2at7a24n9b3etp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEp5p0UKPHx5avPcw6D42UmR5FUCf880I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664135685764-j8tag1p8drqorsvrts2at7a24n9b3etp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
