@@ -1,5 +1,6 @@
 package com.example.insta;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class signup extends AppCompatActivity {
+
 
     EditText name, email, password;
     Button signupBtn;

@@ -17,41 +17,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHolder> {
 
     private Context context;
-    private ArrayList<Story> stories = new ArrayList<>();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private List<Story> stories;
 
-    public StoryAdapter(Context context) {
+    public StoryAdapter(Context context, List<Story> stories) {
         this.context = context;
-        loadStories();
-    }
-
-    // Load stories from Firestore
-    private void loadStories() {
-        db.collection("stories").addSnapshotListener((value, error) -> {
-            if (error != null) {
-                error.printStackTrace();
-                return;
-            }
-
-            if (value != null) {
-                stories.clear();
-                for (QueryDocumentSnapshot doc : value) {
-                    Story story = doc.toObject(Story.class);
-                    stories.add(story);
-                }
-                notifyDataSetChanged();
-            }
-        });
+        this.stories = stories;
     }
 
     @NonNull
     @Override
     public StoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.story_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.story_item, parent, false);
         return new StoryViewHolder(view);
     }
 
@@ -60,12 +41,16 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
         Story story = stories.get(position);
         holder.tvStoryName.setText(story.getUsername());
 
-        // Load profile image with circular crop
         Glide.with(context)
                 .load(story.getProfileImage())
-                .placeholder(R.drawable.skeleton_circle) // optional placeholder
+                .placeholder(R.drawable.skeleton_circle)
                 .circleCrop()
                 .into(holder.imgStory);
+
+        // Optional: click to open story
+        holder.imgStory.setOnClickListener(v -> {
+            // TODO: open full story view using story.getStoryImage()
+        });
     }
 
     @Override

@@ -36,6 +36,18 @@
             android:src="@drawable/ic_more"/>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imgPlay"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignTop="@id/imgPost"
+        android:layout_alignBottom="@id/imgPost"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/ic_play_circle"
+        android:visibility="gone"/>
+
     <!-- Post Image -->
     <ImageView
         android:id="@+id/imgPost"
@@ -52,21 +64,55 @@
         android:padding="12dp">
 
         <ImageView
+            android:id="@+id/imgLike"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:clickable="true"
+            android:focusable="true"
+
             android:src="@drawable/ic_like"/>
 
+        <TextView
+            android:id="@+id/tvLikeCount"
+            android:padding="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="likes"
+            android:textSize="14sp"/>
+
         <ImageView
+            android:id="@+id/imgComment"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_comment"/>
 
+        <TextView
+            android:id="@+id/tvComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="comments"
+            android:padding="3dp"
+            android:textSize="14sp"/>
+
         <ImageView
+            android:id="@+id/imgShare"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_share"/>
+
+        <TextView
+            android:id="@+id/tvShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:padding="3dp"
+            android:textSize="14sp"/>
 
         <View
             android:layout_width="0dp"
@@ -74,9 +120,10 @@
             android:layout_weight="1"/>
 
         <ImageView
-            android:layout_width="24dp"
+            android:id="@+id/imgSave"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:src="@drawable/ic_save"/>
+            android:src="@drawable/ic_save" />
     </LinearLayout>
 
     <!-- Likes -->
