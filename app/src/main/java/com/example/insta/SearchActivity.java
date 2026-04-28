@@ -113,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ReelsActivity.class));
                 return true;
             } else if (id == R.id.nav_profile) {
-                startActivity(new Intent(this, activity_account.class));
+                startActivity(new Intent(this, AccountActivity.class));
                 return true;
             }
             return false;

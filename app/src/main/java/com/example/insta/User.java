@@ -13,10 +13,12 @@ public class User {
         this.profileUrl = profileUrl;
     }
 
+    // Getters
     public String getUid() { return uid; }
     public String getUsername() { return username; }
     public String getProfileUrl() { return profileUrl; }
 
+    // Setters
     public void setUid(String uid) { this.uid = uid; }
     public void setUsername(String username) { this.username = username; }
     public void setProfileUrl(String profileUrl) { this.profileUrl = profileUrl; }

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
+
     private Context context;
     private List<User> users;
 
@@ -31,18 +32,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return new UserViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = users.get(position);
+
         holder.username.setText(user.getUsername());
 
-        // Load profile pic as circular
+        // Load profile image as circular
         Glide.with(context)
-                .load(user.getProfileUrl())
-                .circleCrop()  // <- This makes it circular
+                .load(user.getProfileUrl()) // <-- fixed method
+                .circleCrop()
                 .into(holder.profile);
 
+        // On click, open chat or profile
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("userId", user.getUid());
@@ -51,13 +53,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         });
     }
 
-
     @Override
-    public int getItemCount() { return users.size(); }
+    public int getItemCount() {
+        return users.size();
+    }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView username;
         ImageView profile;
+
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.tvUsername);

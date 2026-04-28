@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
             if (id == R.id.nav_reels)
                 startActivity(new Intent(this, ReelsActivity.class));
             if (id == R.id.nav_profile)
-                startActivity(new Intent(this, activity_account.class));
+                startActivity(new Intent(this, AccountActivity.class));
 
             return true;
         });
@@ -173,7 +173,7 @@ public class HomeActivity extends AppCompatActivity {
 
         new Thread(() -> {
             try {
-                URL url = new URL("https://api.pexels.com/v1/curated?per_page=10");
+                URL url = new URL("https://api.pexels.com/v1/curated?per_page=20");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Authorization", PEXELS_API_KEY);
 

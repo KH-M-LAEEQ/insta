@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,28 +72,41 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
     private void uploadPost() {
-        String caption = etCaption.getText().toString().trim();
-        if (caption.isEmpty()) caption = "";
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        // Make variables final for lambda
+        final String finalCaption = etCaption.getText().toString().trim();
+        final String finalUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String finalUsername = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        final String finalProfileImage = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null ?
+                FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString() : "";
+
         StorageReference postRef = storageRef.child("posts/" + System.currentTimeMillis() + ".jpg");
 
-        String finalCaption = caption;
-        postRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> postRef.getDownloadUrl().addOnSuccessListener(uri -> {
-            Map<String, Object> postMap = new HashMap<>();
-            postMap.put("username", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-            postMap.put("profileImage", FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null ?
-                    FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString() : "");
-            postMap.put("postImage", uri.toString());
-            postMap.put("caption", finalCaption);
-            postMap.put("likes", 0);
-            postMap.put("timestamp", System.currentTimeMillis());
+        postRef.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> postRef.getDownloadUrl()
+                        .addOnSuccessListener(uri -> {
+                            Map<String, Object> postMap = new HashMap<>();
+                            postMap.put("userId", finalUserId);
+                            postMap.put("username", finalUsername);
+                            postMap.put("profileImage", finalProfileImage);
+                            postMap.put("postImage", uri.toString());
+                            postMap.put("caption", finalCaption);
+                            postMap.put("likes", 0);
+                            postMap.put("timestamp", System.currentTimeMillis());
 
-            db.collection("posts").add(postMap).addOnSuccessListener(documentReference -> {
-                Toast.makeText(this, "Post uploaded!", Toast.LENGTH_SHORT).show();
-                finish();
-            }).addOnFailureListener(e -> Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-
-        })).addOnFailureListener(e -> Toast.makeText(this, "Upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            db.collection("posts")
+                                    .add(postMap)
+                                    .addOnSuccessListener(documentReference -> {
+                                        Toast.makeText(this, "Post uploaded!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        })
+                )
+                .addOnFailureListener(e -> Toast.makeText(this, "Upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }

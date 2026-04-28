@@ -37,7 +37,7 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_account"
+            android:name=".AccountActivity"
             android:exported="false" />
         <activity
             android:name=".SearchActivity"
@@ -63,6 +63,10 @@
         <activity
             android:name=".FullScreenMediaActivity"
             android:exported="false" />
+        <activity
+            android:name=".QRActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

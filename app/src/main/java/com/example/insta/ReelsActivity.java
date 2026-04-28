@@ -42,7 +42,7 @@ public class ReelsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reels);
 
-        bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
         recycler = findViewById(R.id.reelsRecycler);
 
         layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -145,7 +145,7 @@ public class ReelsActivity extends AppCompatActivity {
             } else if (id == R.id.nav_reels) {
                 return true; // already here
             } else if (id == R.id.nav_profile) {
-                startActivity(new Intent(this, activity_account.class));
+                startActivity(new Intent(this, AccountActivity.class));
                 return true;
             }
             return false;
